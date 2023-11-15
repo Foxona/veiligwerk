@@ -15,12 +15,31 @@ const Pagination: React.FC<PaginationType> = ({
 }) => {
   const pageNumbers = [];
 
-  for (let i = 1; i <= Math.ceil(totalItems / itemsPerPage); i++) {
+  const [start, setStart] = React.useState(0);
+  const [stop, setStop] = React.useState(Math.ceil(totalItems / itemsPerPage));
+
+  for (let i = start; i <= stop; i++) {
     pageNumbers.push(i);
   }
 
   return (
     <nav>
+      <a
+        onClick={() => {
+          if (currentPage <= 0) return;
+          paginate(currentPage - 1);
+          setStart(start - 1);
+          setStop(stop - 1);
+        }}
+        href="#"
+        className={`${
+          currentPage <= 0 &&
+          "bg-gray-200 hover:bg-gray-200 hover:text-black hover:cursor-not-allowed"
+        }
+        } mr-1 py-2 px-3 leading-tight bg-white border-gray-300 text-gray-500 hover:bg-blue-500 hover:text-white border rounded-md`}
+      >
+        {"<"}
+      </a>
       <ul className="mt-5 inline-flex -space-x-px gap-1 mb-16">
         {pageNumbers.map((number) => (
           <li key={number}>
@@ -39,6 +58,17 @@ const Pagination: React.FC<PaginationType> = ({
           
         ))}
       </ul>
+      <a
+        onClick={() => {
+          paginate(currentPage + 1);
+          setStart(start + 1);
+          setStop(stop + 1);
+        }}
+        href="#"
+        className={`ml-1 py-2 px-3 leading-tight bg-white border-gray-300 text-gray-500 hover:bg-blue-500 hover:text-white border rounded-md`}
+      >
+        {">"}
+      </a>
     </nav>
   );
 };

@@ -29,9 +29,6 @@ const UsersTable = () => {
   }, [currentPage]);
 
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
-  // const indexOfLastUser = currentPage * usersPerPage;
-  // const indexOfFirstUser = indexOfLastUser - usersPerPage;
-  // const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
 
   if (!users) return null;
 
