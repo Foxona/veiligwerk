@@ -28,8 +28,10 @@ const Pagination: React.FC<PaginationType> = ({
         onClick={() => {
           if (currentPage <= 0) return;
           paginate(currentPage - 1);
-          setStart(start - 1);
-          setStop(stop - 1);
+          if (start > 0) {
+            setStart(start - 1);
+            setStop(stop - 1);
+          }
         }}
         href="#"
         className={`${
@@ -55,7 +57,6 @@ const Pagination: React.FC<PaginationType> = ({
               {number}
             </a>
           </li>
-          
         ))}
       </ul>
       <a
